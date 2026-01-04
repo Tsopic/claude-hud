@@ -5,6 +5,12 @@ export function renderSessionLine(ctx) {
     const percent = getContextPercent(ctx.stdin);
     const bar = coloredBar(percent);
     const parts = [];
+    // Add project path (last 3 segments of working directory)
+    if (ctx.stdin.cwd) {
+        const segments = ctx.stdin.cwd.split('/').filter(Boolean);
+        const projectPath = segments.slice(-3).join('/');
+        parts.push(cyan(`📁 ${projectPath}`));
+    }
     parts.push(`${cyan(`[${model}]`)} ${bar} ${getContextColor(percent)}${percent}%${RESET}`);
     if (ctx.claudeMdCount > 0) {
         parts.push(dim(`${ctx.claudeMdCount} CLAUDE.md`));

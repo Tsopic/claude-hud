@@ -36,6 +36,7 @@ Claude HUD gives you better insights into what's happening in your Claude Code s
 
 | What You See | Why It Matters |
 |--------------|----------------|
+| **Project name** | Always know which project you're working in |
 | **Context health** | Know exactly how full your context window is before it's too late |
 | **Tool activity** | Watch Claude read, edit, and search files as it happens |
 | **Agent tracking** | See which subagents are running and what they're doing |
@@ -45,8 +46,9 @@ Claude HUD gives you better insights into what's happening in your Claude Code s
 
 ### Session Info
 ```
-[Opus 4.5] ████░░░░░░ 19% | 2 CLAUDE.md | 8 rules | 6 MCPs | 6 hooks | ⏱️ 1m
+📁 dev/apps/my-project | [Opus 4.5] ████░░░░░░ 19% | 2 CLAUDE.md | 8 rules | 6 MCPs | 6 hooks | ⏱️ 1m
 ```
+- **Project** — Last 3 segments of the working directory path
 - **Model** — Current model in use
 - **Context bar** — Visual meter with color coding (green → yellow → red as it fills)
 - **Config counts** — Rules, MCPs, and hooks loaded

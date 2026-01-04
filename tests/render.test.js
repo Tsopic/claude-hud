@@ -311,3 +311,25 @@ test('renderToolsLine returns null when no tools exist', () => {
   const ctx = baseContext();
   assert.equal(renderToolsLine(ctx), null);
 });
+
+test('renderSessionLine displays last 3 segments of cwd path', () => {
+  const ctx = baseContext();
+  ctx.stdin.cwd = '/Users/dev/projects/apps/my-project';
+  const line = renderSessionLine(ctx);
+  assert.ok(line.includes('projects/apps/my-project'), 'expected last 3 path segments');
+  assert.ok(!line.includes('/Users'), 'should not include full path');
+});
+
+test('renderSessionLine handles short cwd paths gracefully', () => {
+  const ctx = baseContext();
+  ctx.stdin.cwd = '/home/user';
+  const line = renderSessionLine(ctx);
+  assert.ok(line.includes('home/user'), 'expected available path segments');
+});
+
+test('renderSessionLine handles missing cwd', () => {
+  const ctx = baseContext();
+  delete ctx.stdin.cwd;
+  const line = renderSessionLine(ctx);
+  assert.ok(!line.includes('📁'), 'should not include folder emoji without cwd');
+});

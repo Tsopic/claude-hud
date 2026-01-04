@@ -9,6 +9,13 @@ export function renderSessionLine(ctx: RenderContext): string {
 
   const parts: string[] = [];
 
+  // Add project path (last 3 segments of working directory)
+  if (ctx.stdin.cwd) {
+    const segments = ctx.stdin.cwd.split('/').filter(Boolean);
+    const projectPath = segments.slice(-3).join('/');
+    parts.push(cyan(`📁 ${projectPath}`));
+  }
+
   parts.push(`${cyan(`[${model}]`)} ${bar} ${getContextColor(percent)}${percent}%${RESET}`);
 
   if (ctx.claudeMdCount > 0) {
